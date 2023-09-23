@@ -1,21 +1,17 @@
 import './App.css';
 import Feed from './component/feed/feed';
-
+import Home from './pages/HomePage/home';
+import Login from './pages/LoginPage/login';
 function App() {
   return (
-    <div className="bg-blue-600">
+    <div className="bg-white-600">
+      <Home/>
       <Feed/>
+      <Login/>
+      {/* <Feed/> */}
     </div>
   );
 }
 
 export default App;
 
-
- function Test() {
-  return (
-    <h1 className="absolute text-center w-[5000px] -translate-y-2/4 -translate-x-2/4 left-2/4 top-[135px]">
-      Hello world!
-    </h1>
-  )
-}
