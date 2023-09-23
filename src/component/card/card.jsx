@@ -1,22 +1,37 @@
-import React from "react";
-function Card({ title }) {
-  return (
-    <div>
-      <div className="relative h-[430px] w-[280px] overflow-hidden  m-auto shrink-0">
-        <div className=" absolute text-center -translate-x-2/4 left-2/4  top-[10px]">
-          <div className="relative w-[250px] h-[400px] duration-[0.5s]  cursor-pointer hover:delay-[0.2s] hover:w-[280px] hover:h-[420px] hover:z-10 list-style: none">
-            <div className="absolute w-full  h-full bg-cover bg-[center_top]">
-              <img
-                alt="image1"
-                src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
-              ></img>
-              {title}
-            </div>
-          </div>
-        </div>
-      </div>
+import { useEffect, useState } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { Link } from "react-router-dom";
+
+const Card = ({ image_src, image_alt, id }) => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 400);
+  });
+
+  return loading ? (
+    <div className="relative mx-[.22rem] h-[9.7rem] w-[6.6rem] animate-pulse space-y-5  overflow-hidden rounded-md bg-gray-800 bg-gradient-to-r  from-transparent via-gray-600 to-transparent pb-2 shadow-xl  shadow-black/5 before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_1s_infinite] before:border-t before:border-gray-900 before:bg-gradient-to-r before:from-transparent before:via-gray-900 before:to-transparent md:w-[16rem]">
+      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+        <p>
+          <Skeleton duration={2} />
+        </p>
+      </SkeletonTheme>
     </div>
+  ) : (
+    <Link to={`/movie/${id}`}>
+     <div className="mx-[.22rem] w-[8rem] md:w-[10rem]">
+  <div className="h-[12rem] md:h-[15rem] flex justify-center items-center">
+    <img
+      className="h-auto w-full max-h-full object-contain rounded-md md:rounded-sm"
+      src={image_src}
+      alt={image_alt}
+    />
+  </div>
+</div>
+
+    </Link>
   );
-}
+};
 
 export default Card;

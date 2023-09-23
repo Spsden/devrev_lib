@@ -11,7 +11,7 @@ function User() {
         <Sidebar />
         <div className="grow">
           <div className="ms-64">
-            <Body />
+            <Feed/>
           </div>
         </div>
       </div>
