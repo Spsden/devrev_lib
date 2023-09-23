@@ -6,10 +6,14 @@ import { Outlet } from 'react-router-dom'
 
 const CommonLayout = () => {
   return (
-    <div className='bg-blue-600 text-black'>
+    <div className='bg-blue-600 text-black  '>
     {/* <Sidebar/> */}
     <Header/>
+    <main>
     <Outlet/>
+
+    </main>
+    
     
     <Footer/>
   
