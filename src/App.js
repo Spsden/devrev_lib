@@ -8,8 +8,9 @@ import User from "./pages/UserPage/user";
 import { Navigate } from "react-router-dom";
 import CommonLayout from "./component/commonLayout/commonLayout";
 import SearchResults from "./pages/SeachResults/searchResults";
-import { useContext } from "react";
-import { AuthContext } from "./utiils/context/Auth.context.js";
+
+import { RequireAuth } from 'react-auth-kit'
+
 
 function App() {
   return (
@@ -17,7 +18,12 @@ function App() {
       <Route path="/" element={<CommonLayout />}>
         <Route index element={<Home />} />
         <Route path="home" element={<Home />} />
-        <Route path="user" element={<User />} />
+        <Route path="user" element={
+          <RequireAuth loginPath="/login">
+            <User/>
+
+          </RequireAuth>
+        } />
 
         <Route path="/search/:searchTerm" element={<SearchResults />} />
 

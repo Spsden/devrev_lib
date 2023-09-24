@@ -1,10 +1,21 @@
 import React from "react";
 import { useSignOut } from 'react-auth-kit'
+import { useNavigate } from "react-router-dom";
 
 
 
 function Sidebar() {
   const signOut = useSignOut()
+
+  const navigate = useNavigate()
+
+  const handleSignout = () => {
+    console.log("signout lciked")
+    navigate("/login");
+    signOut();
+    console.log("signed out")
+
+  }
 
 
   
@@ -91,7 +102,8 @@ function Sidebar() {
             </li>
 
 
-            <li onClick={()=>signOut()}>
+            <li >
+              <button onClick={handleSignout}>
               <p
                 href="#"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
@@ -113,6 +125,9 @@ function Sidebar() {
                 </svg>
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign out</span>
               </p>
+
+              </button>
+             
             </li>
 
 

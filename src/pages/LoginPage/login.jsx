@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Header from "../../component/homePage/header";
 import { useSignIn } from "react-auth-kit";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate()
   
   const signIn = useSignIn();
   const handleSignup = async (e) => {
@@ -41,6 +42,9 @@ function Login() {
           expiresIn: 3600,
           authState: { email: username },
         });
+        navigate("/user")
+
+        
       } else {
         console.error("Signup failed");
       }
