@@ -5,8 +5,8 @@ import { AiOutlineMail } from "react-icons/ai";
 
 function Footer() {
   return (
-    <div className='bg-black h-96 mt-48'>
-      <div className='flex justify-evenly h-full pt-48'>
+   
+      <div className='flex justify-evenly '>
         <a href='https://github.com/'>
           <FaGithub size={40} style={{ color: "#FFFFFF" }}/>
         </a>
@@ -18,7 +18,6 @@ function Footer() {
         </a>
       </div>
 
-    </div>
   )
 }
 

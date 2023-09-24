@@ -5,7 +5,7 @@ function Sidebar() {
     <div>
       <aside
         id="default-sidebar"
-        className="fixed top-23 mt-23 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className="fixed top-20 mt-23 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 pt-24  overflow-y-auto bg-gray-50 dark:bg-gray-900">

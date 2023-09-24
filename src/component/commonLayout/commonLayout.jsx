@@ -6,18 +6,17 @@ import { Outlet } from 'react-router-dom'
 
 const CommonLayout = () => {
   return (
-    <div className='bg-blue-600 text-black  '>
-    {/* <Sidebar/> */}
-    <Header/>
-    <main>
-    <Outlet/>
-
+    <div className="flex flex-col h-screen">
+    <header className="bg-gray-800 text-white p-4 Z-20"><Header/></header>
+    <main className="flex-grow p-4 overflow-y-auto z-10 mt-[3.6rem]">
+      {/* Use <Outlet> to render the main content */}
+      <Outlet />
     </main>
-    
-    
-    <Footer/>
-  
+    <footer className="bg-gray-800 text-white p-4"><Footer/></footer>
   </div>
+  
+  
+ 
     
   )
 }

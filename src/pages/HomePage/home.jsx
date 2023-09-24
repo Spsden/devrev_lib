@@ -9,6 +9,7 @@ function Home() {
   return (
     <div className='bg-blue-600 text-black'>
       {/* <Sidebar/> */}
+  
     
      
       <Hero/>
