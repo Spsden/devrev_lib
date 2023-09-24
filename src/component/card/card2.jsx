@@ -3,12 +3,12 @@ function Card2({ title, img_src }) {
     //console.log(img_src)
   return (
     <div className="flex justify-center">
-      <div className="relative h-[430px] w-[280px] overflow-hidden ">
+      <div className="relative h-60 w-40 overflow-hidden ">
         <div className=" absolute text-center -translate-x-2/4 left-2/4  top-[10px]">
-          <div className="relative w-[250px] h-[400px] duration-[0.4s]  cursor-pointer hover:delay-[0.1s] hover:w-[280px] hover:h-[420px] hover:z-10 ">
+          <div className="relative w-[250px] duration-[0.4s]  cursor-pointer ">
             
             <section className="absolute w-full  h-full bg-cover bg-[center_top]">
-              <div className="w-[250px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+              <div className="w-[250px] bg-white shadow-md rounded-xl duration-500 ">
                 <img
                   src={img_src}
                   alt="BOOK NAME"
