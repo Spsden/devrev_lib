@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Header from "../../component/homePage/header";
 import { useSignIn } from "react-auth-kit";
+import { Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  
   const signIn = useSignIn();
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -15,13 +17,16 @@ function Login() {
     };
 
     try {
-      const response = await fetch("https://booksdbdep.onrender.com/api/v1/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
+      const response = await fetch(
+        "https://booksdbdep.onrender.com/api/v1/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
 
       if (response.ok) {
         console.log("Signup successful");
@@ -29,7 +34,7 @@ function Login() {
         const data = await response.json();
         const username = data.user.name;
         const token = data.token;
-        console.log(username)
+        console.log(username);
         signIn({
           token: token,
           tokenType: "Bearer",
@@ -108,12 +113,22 @@ function Login() {
 
                 <button
                   type="submit"
-              
-                  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
                   Login
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400"></p>
+
+                <Link to="/signup">
+                <button
+                 
+                 type="button"
+                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+               >
+                 Signup
+               </button>
+
+                </Link>
+               
               </form>
             </div>
           </div>

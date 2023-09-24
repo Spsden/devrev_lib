@@ -2,6 +2,9 @@
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import { useIsAuthenticated } from "react-auth-kit";
+import { useAuthUser } from "react-auth-kit";
+
 import {
   ArrowPathIcon,
   Bars3Icon,
@@ -62,14 +65,19 @@ function classNames(...classes) {
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const isAuthenticated = useIsAuthenticated();
+  const auth = useAuthUser();
+
   return (
     <header className="bg-gray-50 dark:bg-gray-900 fixed top-0 left-0 right-0">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
-        <Link to="/home
-        ">
+        <Link
+          to="/home
+        "
+        >
           <div className="flex lg:flex-1">
             <span className="sr-only  text:white dark:text-white">
               Your Company
@@ -81,13 +89,23 @@ export default function Header() {
           <SearchBar />
         </div>
 
-        <Link to="/login">
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+        {isAuthenticated ? (
+          <Link to='/user'>
+           <div className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+          Hello {auth().email}
           </div>
-        </Link>
+          </Link>
+         
+        ) : (
+          <Link to="/login">
+            <button
+              type="button"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            >
+              Login
+            </button>
+          </Link>
+        )}
       </nav>
 
       <Dialog
@@ -168,6 +186,7 @@ export default function Header() {
 
               <Link to="/login">
                 <div className="py-6">
+                  <p>Login</p>
                   {/* <a
                   // href="#"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
