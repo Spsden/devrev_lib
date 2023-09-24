@@ -30,7 +30,7 @@ function Login() {
       );
 
       if (response.ok) {
-        console.log("Signup successful");
+        console.log("login successful");
 
         const data = await response.json();
         const username = data.user.name;
