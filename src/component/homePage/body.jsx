@@ -40,13 +40,6 @@ const Body = () => {
       {allRecommendations.map((data) => {
         return <Shelf title={data.genre} books={data.data} />;
       })}
-
-      {/*       
-      <Shelf title={"History"} fetchUrl={history} />
-      <Shelf title={"Fiction"} books={fiction} />
-      <Shelf title={"Horror"} fetchUrl={fiction} />
-      <Shelf title={"Romance"} fetchUrl={romance} />
-      <Shelf title={"Thriller"} fetchUrl={thriller} /> */}
     </div>
   );
 };

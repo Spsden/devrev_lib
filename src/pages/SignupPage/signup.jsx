@@ -1,7 +1,69 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import Header from '../../component/homePage/header'
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate()
+
+  // State to track authentication status
+  //const [authenticated, setAuthenticated] = useState(false);
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    // Create a JSON object with the user data
+    const userData = {
+      username,
+      email,
+      password,
+    };
+
+    try {
+      // Send a POST request to your server's signup endpoint
+      const response = await fetch('YOUR_SIGNUP_ENDPOINT', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        console.log('Signup successful');
+        
+        const data = await response.json();
+        const token = data.token;
+        navigate("/login")
+
+
+
+        // // Store the token in localStorage
+        // localStorage.setItem('accessToken', token);
+
+        
+        // setAuthenticated(true);
+      } else {
+        // Handle signup error (e.g., display an error message)
+        console.error('Signup failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem('accessToken');
+
+  //   if (storedToken) {
+  //     setAuthenticated(true);
+  //   }
+  // }, []);
+
+
+  
   return (
     <div>
     
@@ -35,6 +97,8 @@ function Signup() {
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Enter Your name"
               required=""
+              onChange={(e) => setUsername(e.target.value)}
+              
             />
           </div>
           <div>
@@ -51,6 +115,7 @@ function Signup() {
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="name@company.com"
               required=""
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div>
@@ -67,6 +132,7 @@ function Signup() {
               placeholder="••••••••"
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
+              onChange={(e) => setPassword(e.target.value)} 
             />
           </div>
           <div>

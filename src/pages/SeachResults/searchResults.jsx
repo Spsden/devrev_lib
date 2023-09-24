@@ -6,7 +6,7 @@ import { MoonLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 
 
-function SearchResults() {
+function SearchResults({redirectionTo}) {
   const { searchTerm } = useParams();
   console.log(searchTerm);
   const listInnerRef = useRef();

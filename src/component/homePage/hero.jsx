@@ -17,8 +17,8 @@ function Hero() {
         </div>
         </div>
 
-      <div className='bg-purple-600 py-32 px-16'>
-        <img className="w-80" src="https://images.unsplash.com/photo-1571988840298-3b5301d5109b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80" alt="hero_image"></img>
+      <div className=''>
+        <img className="w-80" src="/asseta.png" alt="hero_image"></img>
       </div>
       </div>
   )
