@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import Header from "../../component/homePage/header";
+import React, { useState,  } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { useSignIn } from "react-auth-kit";
 import { Link } from "react-router-dom";
@@ -11,13 +11,9 @@ function Signup() {
   const navigate = useNavigate();
   const signIn = useSignIn();
 
-  // State to track authentication status
-  //const [authenticated, setAuthenticated] = useState(false);
-
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Create a JSON object with the user data
     const userData = {
       username,
       email,
@@ -25,7 +21,6 @@ function Signup() {
     };
 
     try {
-      // Send a POST request to your server's signup endpoint
       const response = await fetch(
         "https://booksdbdep.onrender.com/api/v1/auth/register",
         {
@@ -51,12 +46,8 @@ function Signup() {
         });
         navigate("/user");
 
-        // // Store the token in localStorage
-        // localStorage.setItem('accessToken', token);
-
         // setAuthenticated(true);
       } else {
-        // Handle signup error (e.g., display an error message)
         console.error("Signup failed");
       }
     } catch (error) {

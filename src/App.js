@@ -10,6 +10,9 @@ import CommonLayout from "./component/commonLayout/commonLayout";
 import SearchResults from "./pages/SeachResults/searchResults";
 
 import { RequireAuth } from 'react-auth-kit'
+import Cart from "./pages/UserPage/SubPages/cart";
+import Borrowed from "./pages/UserPage/SubPages/borrowed";
+import Suggestions from "./pages/UserPage/SubPages/suggestions";
 
 
 function App() {
@@ -23,7 +26,11 @@ function App() {
             <User/>
 
           </RequireAuth>
-        } />
+        } >
+          <Route path="cart" element={<Cart/>}/>
+          <Route path="borrowed" element={<Borrowed/>}/>
+          <Route path="suggestions" element={<Suggestions/>}/>
+        </Route>
 
         <Route path="/search/:searchTerm" element={<SearchResults />} />
 
