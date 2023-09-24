@@ -16,9 +16,9 @@ const Shelf = ({ title, books }) => {
       <div className="no-scrollbar grid grid-flow-col overflow-x-scroll px-2 md:hidden ">
         {books &&
           books.length > 0 &&
-          books.map((i) => (
+          books.map((i,key) => (
             <Card
-               key={i && i.id}
+               key={key}
             
               image_src={i.image_url_l}
             //   image_alt={i && i.original_title}
@@ -29,9 +29,9 @@ const Shelf = ({ title, books }) => {
       <div className="no-scrollbar hidden grid-flow-col overflow-x-scroll px-2 md:grid  ">
         {books &&
           books.length > 0 &&
-          books.map((i) => (
+          books.map((i,key) => (
             <Card
-            key={i && i.id}
+            key={key}
          
            image_src={i.image_url_l}
          //   image_alt={i && i.original_title}

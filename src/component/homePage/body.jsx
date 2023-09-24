@@ -37,8 +37,8 @@ const Body = () => {
 
   return (
     <div className="">
-      {allRecommendations.map((data) => {
-        return <Shelf title={data.genre} books={data.data} />;
+      {allRecommendations.map((data,key) => {
+        return <Shelf key={key} title={data.genre} books={data.data} />;
       })}
     </div>
   );
