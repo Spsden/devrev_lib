@@ -36,36 +36,36 @@ const DropDown = () => {
         aria-labelledby="dropdownDefaultButton"
       >
         <li>
-          <a
-            href="#"
+          <p
+           
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             Dashboard
-          </a>
+          </p>
         </li>
         <li>
-          <a
+          <p
             href="#"
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             Settings
-          </a>
+          </p>
         </li>
         <li>
-          <a
+          <p
             href="#"
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             Earnings
-          </a>
+          </p>
         </li>
         <li>
-          <a
+          <p
             href="#"
             className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             Sign out
-          </a>
+          </p>
         </li>
       </ul>
     </div>

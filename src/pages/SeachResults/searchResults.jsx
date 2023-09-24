@@ -1,110 +1,94 @@
-import React, { useState, useEffect ,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import ListingPageComponent from "./ListingPageComponent";
+import Card2 from "../../component/card/card2";
+import { MoonLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 
-import Card2 from "../../component/card/card2";
-import MoonLoader from "react-spinners/MoonLoader";
 
-
-
-const SearchResults = () => {
+function SearchResults() {
   const { searchTerm } = useParams();
   console.log(searchTerm);
-
-  const [result, setResult] = useState([]);
-  const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(true);
   const listInnerRef = useRef();
+  const [currPage, setCurrPage] = useState(1);
+  const [prevPage, setPrevPage] = useState(0);
+  const [bookList, setBookList] = useState([]);
+  const [lastPage, setLastPage] = useState(false);
+  // State variable for the API key
 
-  async function fetchData(searchTerm, page) {
-    try {
-      const endpoint = "http://localhost:3001/api/v1/bookdb";
+  const key = "AIzaSyBsWNaSjQ41Q_AXHNLAaBr7J_o8AsCevKw";
 
-      // Construct the URL with query parameters
-      const url = `${endpoint}?search=${encodeURIComponent(
-        searchTerm
-      )}&page=${page}`;
-      const response = await fetch(url);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&startIndex=${currPage}&maxResults=10&key=${key}`
+        );
+
+        if (response.data.items && response.data.items.length === 0) {
+          setLastPage(true);
+          return;
+        }
+        console.log(response.data.items);
+
+        setPrevPage(currPage);
+        setBookList([...bookList, ...response.data.items]);
+      } catch (error) {
+        console.error("Error:", error);
       }
+    };
 
-      const res = await response.json();
-      const searchResponse = res.results;
-
-      // If it's the first page (page === 1), set the results directly, otherwise append
-      setResult((data) => (page === 0 ? searchResponse : [...data, ...searchResponse]));
-      setLoading(false);
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
+    if (!lastPage && prevPage !== currPage) {
+      fetchData();
     }
-  }
+  }, [currPage, lastPage, prevPage, bookList]);
 
-  // const onScroll = () => {
-  //   if (listInnerRef.current) {
-  //     const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
-  //     if (scrollTop + clientHeight === scrollHeight) {
-  //       setLoading(true);
-  //       setPage((prevPage) => {
-  //         // Log the page number when it changes
-  //         console.log(`Page changed to: ${prevPage + 1}`);
-  //         return prevPage + 1;
-  //       });
-  //     }
-  //   }
-  // };
-
-  const handleInfiniteScroll = async () => {
-    console.log("trigge")
-    try {
-      console.log(page);
-     
-      if (
-        window.innerHeight + document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setLoading(true);
-        setPage((prevPage) => {
-          // Log the page number when it changes
-          console.log(`Page changed to: ${prevPage + 1}`);
-          return prevPage + 1;
-        });
-      }
-    } catch (error) {}
-  };
-
+  useEffect(() => {
+  setCurrPage(0)
+  setBookList([])
+    
+  }, [searchTerm])
   
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleInfiniteScroll);
-    return () => {
-      window.removeEventListener("scroll", handleInfiniteScroll);
-    };
-  }, [page]);
-
-  useEffect(() => {
-    // Clear existing results when a new search term is given
-    setResult([]);
-    setPage(1); // Reset page to 1 for the new search
-    fetchData(searchTerm, 1);
-  }, [searchTerm]);
+  const onScroll = () => {
+    if (listInnerRef.current) {
+      console.log("'scrolled'");
+      const { scrollTop, scrollHeight, clientHeight } = listInnerRef.current;
+      if (scrollTop + clientHeight === scrollHeight) {
+        setCurrPage(currPage + 1);
+      }
+    }
+  };
 
   return (
-    <div className="bg-yellow pt-8">
-      <div ref={listInnerRef} onScroll={console.log("scrolllled")} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 overflow-y-auto h-4/6 bg-slate-600	">
-        {result &&
-          result.length > 0 &&
-          result.map((i) => (
-            <Card2 key={i && i.id} title={i.book_title} img_src={i.image_url_m} />
-          ))}
+    <div>
+      <div className="bg-yellow pt-8">
+        <div
+          ref={listInnerRef}
+          onScroll={onScroll}
+          style={{
+            border: "1px solid black",
+            width: "100%",
+            height: "90vh",
+
+            overflow: "auto",
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 	"
+        >
+          {bookList &&
+            bookList.length > 0 &&
+            bookList.map((i, index) => (
+              <Card2
+                key={index}
+                title={i.volumeInfo.title}
+                img_src={i.volumeInfo?.imageLinks?.thumbnail}
+              />
+            ))}
+        </div>
       </div>
-      {loading && <MoonLoader />}
     </div>
   );
-};
+}
 
 export default SearchResults;
-
-
-

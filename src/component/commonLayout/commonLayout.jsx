@@ -8,7 +8,7 @@ const CommonLayout = () => {
   return (
     <div className="flex flex-col h-screen">
     <header className="bg-gray-800 text-white p-4 Z-20"><Header/></header>
-    <main className="flex-grow p-4 overflow-y-auto z-10 mt-[3.6rem]">
+    <main className="flex-grow p-4 overflow-y-auto  mt-[3.6rem] h-14">
       {/* Use <Outlet> to render the main content */}
       <Outlet />
     </main>
