@@ -40,7 +40,7 @@ function Login() {
           token: token,
           tokenType: "Bearer",
           expiresIn: 3600,
-          authState: { email: username },
+          authState: { email: username ,token:token},
         });
         navigate("/user")
 
