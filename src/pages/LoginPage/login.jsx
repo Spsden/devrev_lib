@@ -71,7 +71,7 @@ function Login() {
                     htmlFor="Name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
-                    UserName
+                    email
                   </label>
                   <input
                     type="text"
