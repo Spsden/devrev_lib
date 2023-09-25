@@ -13,6 +13,7 @@ import { RequireAuth } from "react-auth-kit";
 import Cart from "./pages/UserPage/SubPages/cart";
 import Borrowed from "./pages/UserPage/SubPages/borrowed";
 import Suggestions from "./pages/UserPage/SubPages/suggestions";
+import ProjectDetails from "./pages/AboutPage/about";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
 
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/about" element={<ProjectDetails />} />
     </Routes>
   );
 }
