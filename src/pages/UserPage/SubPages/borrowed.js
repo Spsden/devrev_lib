@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthUser } from "react-auth-kit";
+import Book from "../../../component/card/bookCard";
 
 const Borrowed = () => {
   const auth = useAuthUser();
@@ -35,7 +36,32 @@ const Borrowed = () => {
     fetchData();
   }, []);
 
-  return <div>{JSON.stringify(issuedBooks)}hjvjhv</div>;
+  return (
+    <>
+     <div>
+      <div className=" pt-8">
+        <div
+          
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-full"
+        >
+          {issuedBooks &&
+            issuedBooks.length > 0 &&
+            issuedBooks.map((book, index) => (
+              <Book
+                key={index}
+                title={book.book_title}
+                author={book.book_author}
+                genre={book.genre}
+                coverImage={book.image_url_l}
+                authCheckCallBack={()=>{}}
+              />
+            ))}
+        </div>
+      </div>
+    </div>
+    </>
+
+  )
 };
 
 export default Borrowed;
